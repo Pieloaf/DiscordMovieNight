@@ -1,0 +1,4 @@
+botToken
+TMDbToken
+*__pycache__/*
+*.vscode/*
