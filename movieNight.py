@@ -14,6 +14,7 @@ game = discord.Activity(name="Movies 🍿", type=discord.ActivityType.watching)
 async def on_ready():
     print(f'{client.user} is ready')
     await client.change_presence(status=discord.Status.online, activity=game)
+    loadCogs()
 
 
 def loadCogs():
