@@ -21,4 +21,5 @@ NOVOTE = "There is currently no movie vote. Use `+movievote` to start the vote"
 # TMDb URLs
 SEARCHURL = 'https://api.themoviedb.org/3/search/movie?api_key={}&query={}&primary_release_year={}'
 MOVIEURL = 'https://www.themoviedb.org/movie/{}'
-IMAGEURL = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2{}'
+GETIMAGE = ' https://api.themoviedb.org/3/movie/{}/images?api_key={}&language={}'
+IMAGEURL = 'https://www.themoviedb.org/t/p/original{}'

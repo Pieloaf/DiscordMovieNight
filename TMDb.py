@@ -1,6 +1,6 @@
 import requests
 import os
-from const import SEARCHURL, MOVIEURL, IMAGEURL
+from const import SEARCHURL, MOVIEURL, IMAGEURL, GETIMAGE
 from urllib.parse import quote as encode
 
 with open('./TMDbToken') as file:
@@ -24,7 +24,16 @@ def movieData(movie):
     return {
         'url': MOVIEURL.format(movie['id']),
         'name': movie['title'],
-        'year': movie['primary_release_year'][:4],
-        'image': IMAGEURL.format(movie['poster_path']),
-        'score': int(movie['vote_average'])*10
+        'year': movie['release_date'][:4],
+        'score': int(float(movie['vote_average'])*10)
     }
+
+
+def getThumb(id):
+    try:
+        image = requests.get(GETIMAGE.format(id, TMDbToken, 'en')).json()[
+            'posters'][0]['file_path']
+    except IndexError:
+        image = requests.get(GETIMAGE.format(id, TMDbToken, '')).json()[
+            'posters'][0]['file_path']
+    return(IMAGEURL.format(image))

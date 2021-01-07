@@ -61,15 +61,18 @@ class Movies(commands.Cog):
         movie = search(title, year=year)
 
         # assinging movie reaction emote
+        reactEmoji = [reaction.emoji for reaction in msg.reactions]
+        print(reactEmoji)
         for emoji in voteEmotes:
-            if emoji not in msg.reactions.emoji:
+            if emoji not in reactEmoji:
                 movie['emoji'] = emoji
                 break
 
         # adding field for new movie
-        embed['fields'].append(
+        embed.add_field(
             name=f"{movie['emoji']} {movie['name']} ({movie['year']})",
             value=f"[Reviews: {movie['score']}%]({movie['url']})",
+            inline=False
         )
         moviemenu['movies'].append(movie)
         await msg.edit(embed=embed)
@@ -89,7 +92,7 @@ class Movies(commands.Cog):
 
         if ctx.author.id == moviemenu['host']:
             removeMsg = await ctx.send("React to remove a movie")
-            self.bot.remove.append((ctx.channel.id, removeMsg.id))
+            self.bot.remove.append(moviemenu['movieMsg'])
 
     async def isVoteActive(self, ctx):
         if not path.exists(f"./{ctx.guild.id}_movie.json"):
