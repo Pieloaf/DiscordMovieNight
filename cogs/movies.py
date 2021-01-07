@@ -99,3 +99,7 @@ class Movies(commands.Cog):
             with open(f"./{ctx.guild.id}_movie.json", 'r') as json_file:
                 moviemenu = json.load(json_file)
             return moviemenu
+
+
+def setup(bot):
+    bot.add_cog(Movies(bot))

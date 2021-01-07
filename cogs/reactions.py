@@ -93,7 +93,7 @@ class Reactions(commands.Cog):
                 {
                     'title': (' ').join(field['name'].split()[1:]),
                     'url': re.findall("\((.*?)\)", field['value'])[0],
-                    'description': f'Reviews: {re.findall("\[(.*?)\]", field['value'])[0]}',
+                    'description': re.findall('\[(.*?)\]', field['value'])[0],
                     'color': 11306689
                 }
             )
